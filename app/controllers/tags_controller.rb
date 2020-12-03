@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :update, :destroy]
+  before_action :set_tag, only: [:show, :update, :destroy, :queuecards]
 
   # GET /tags
   def index
@@ -36,6 +36,10 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   def destroy
     @tag.destroy
+  end
+
+  def queuecards
+    @tag.queuecards
   end
 
   private

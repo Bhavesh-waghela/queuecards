@@ -1,5 +1,5 @@
 class QueuecardsController < ApplicationController
-  before_action :set_queuecard, only: [:show, :update, :destroy]
+  before_action :set_queuecard, only: [:show, :tags, :update, :destroy]
 
   # GET /queuecards
   def index
@@ -36,6 +36,10 @@ class QueuecardsController < ApplicationController
   # DELETE /queuecards/1
   def destroy
     @queuecard.destroy
+  end
+
+  def tags
+    @queuecard.tags
   end
 
   private
