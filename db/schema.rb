@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201203180231) do
+ActiveRecord::Schema.define(version: 20201203180850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,23 @@ ActiveRecord::Schema.define(version: 20201203180231) do
     t.index ["user_id"], name: "index_queuecards_on_user_id"
   end
 
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "queuecard_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["queuecard_id"], name: "index_taggings_on_queuecard_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tags_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "login"
     t.string "name"
@@ -32,4 +49,7 @@ ActiveRecord::Schema.define(version: 20201203180231) do
   end
 
   add_foreign_key "queuecards", "users"
+  add_foreign_key "taggings", "queuecards"
+  add_foreign_key "taggings", "tags"
+  add_foreign_key "tags", "users"
 end
