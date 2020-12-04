@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.7'
+gem 'rails'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'pg', '~> 0.18'
@@ -21,6 +21,9 @@ gem 'puma', '~> 3.7'
 gem 'faraday', '~> 0.11'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'jwt', '~> 1.5'
+
+gem "react_on_rails"
+gem "webpacker", "~> 5"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
