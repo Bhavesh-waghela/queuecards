@@ -1,9 +1,10 @@
 class QueuecardsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_queuecard, only: [:show, :tags, :update, :destroy]
 
   # GET /queuecards
   def index
-    @queuecards = Queuecard.all
+    @queuecards = @current_user.queuecards
 
     render json: @queuecards
   end
@@ -45,7 +46,7 @@ class QueuecardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_queuecard
-      @queuecard = Queuecard.find(params[:id])
+      @queuecard = @current_user.queuecards.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

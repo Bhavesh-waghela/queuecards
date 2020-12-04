@@ -3,6 +3,8 @@ require 'test_helper'
 class QueuecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @queuecard = queuecards(:one)
+    @token = TokiToki.encode(@user.login)
+    @queuecard = @user.queuecard.first
   end
 
   test "should get index" do
@@ -12,14 +14,23 @@ class QueuecardsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create queuecard" do
     assert_difference('Queuecard.count') do
-      post queuecards_url, params: { queuecard: { answer: @queuecard.answer, question: @queuecard.question, user_id: @queuecard.user_id } }, as: :json
+      post queuecards_url, params: { 
+        token: @token, 
+        queuecard: { 
+          answer: @queuecard.answer, 
+          question: @queuecard.question, 
+          user_id: @queuecard.user_id 
+        } 
+      }, as: :json
     end
 
     assert_response 201
   end
 
   test "should show queuecard" do
-    get queuecard_url(@queuecard), as: :json
+    get queuecard_url(@queuecard), params: {
+      token: @token
+    }
     assert_response :success
   end
 
